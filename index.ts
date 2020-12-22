@@ -4,10 +4,15 @@ import webdriver, { By, until } from 'selenium-webdriver';
 
 const driver = new webdriver.Builder().forBrowser('firefox').build();
 
+const mensaje = 'Soy un mensaje automático. Hola.';
+
 const login = async () => {
     await driver.get('https://web.whatsapp.com');
-    console.log('Esperando 10 segundos pa que se logueen');
-    await new Promise(r => setTimeout(r, 10000));
+    console.log('Esperando pa que se logueen');
+    const contactButtonLocator = By.xpath(
+        '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
+    );
+    await driver.wait(until.elementLocated(contactButtonLocator), 15000);
     console.log('Listo');
 };
 
@@ -36,7 +41,7 @@ async function main() {
         if (isNaN(+number)) {
             return console.log(`${number} is not number.`);
         }
-        await sendMessage(number, 'Hola');
+        await sendMessage(number, mensaje);
     }
 }
 
