@@ -12,7 +12,7 @@ const login = async () => {
     const contactButtonLocator = By.xpath(
         '//*[@id="side"]/header/div[2]/div/span/div[2]/div'
     );
-    await driver.wait(until.elementLocated(contactButtonLocator), 15000);
+    await driver.wait(until.elementLocated(contactButtonLocator), 15000); // wait until new chat button appears
     console.log('Listo');
 };
 
@@ -23,7 +23,7 @@ const sendMessage = async (number: string, message: string) => {
     const inputLocator = By.xpath(
         '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'
     );
-    await driver.wait(until.elementLocated(inputLocator), 15000);
+    await driver.wait(until.elementLocated(inputLocator), 15000); // wait until chat input appears
     const input = driver.findElement(inputLocator);
     await input.sendKeys(message);
     const sendButton = driver.findElement(
