@@ -20,11 +20,11 @@ const sendMessage = async (number: string, message: string) => {
     await driver.get(
         `https://web.whatsapp.com/send?phone=${number}&text&app_absent=0`
     );
-    const buttonLocator = By.xpath(
+    const inputLocator = By.xpath(
         '//*[@id="main"]/footer/div[1]/div[2]/div/div[2]'
     );
-    await driver.wait(until.elementLocated(buttonLocator), 15000);
-    const input = driver.findElement(buttonLocator);
+    await driver.wait(until.elementLocated(inputLocator), 15000);
+    const input = driver.findElement(inputLocator);
     await input.sendKeys(message);
     const sendButton = driver.findElement(
         By.xpath('//*[@id="main"]/footer/div[1]/div[3]/button')
