@@ -1,10 +1,12 @@
 import lineByLine from 'n-readlines';
 import path from 'path';
-import webdriver, { By, until } from 'selenium-webdriver';
+import webdriver, { By, Key, until } from 'selenium-webdriver';
 
 const driver = new webdriver.Builder().forBrowser('firefox').build();
 
-const mensaje = 'Soy un mensaje automático. Hola.';
+const mensaje = `Soy un mensaje automático.
+Hola.
+abcDeF`;
 
 const login = async () => {
     await driver.get('https://web.whatsapp.com');
@@ -25,7 +27,12 @@ const sendMessage = async (number: string, message: string) => {
     );
     await driver.wait(until.elementLocated(inputLocator), 15000); // wait until chat input appears
     const input = driver.findElement(inputLocator);
-    await input.sendKeys(message);
+    // await input.sendKeys(message);
+    const lineas = message.split('\n');
+    for (let linea of lineas) {
+        await input.sendKeys(linea);
+        await input.sendKeys(Key.SHIFT, '\n');
+    }
     const sendButton = driver.findElement(
         By.xpath('//*[@id="main"]/footer/div[1]/div[3]/button')
     );
